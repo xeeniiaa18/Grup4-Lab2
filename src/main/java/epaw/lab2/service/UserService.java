@@ -103,7 +103,7 @@ public class UserService {
         }
 
         String allergies = user.getAllergies();
-        if (allergies != null && !allergies.trim().isEmpty() && allergies.length() > 200) {
+        if (allergies.length() > 200) {
             errors.put("allergies", "Allergies must not exceed 200 characters.");
         }
 
