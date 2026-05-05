@@ -23,7 +23,7 @@ public class UserRepository extends BaseRepository {
 	}
 
 	public boolean existsByUsername(String username) {
-		String query = "SELECT COUNT(*) FROM users WHERE name = ?";
+		String query = "SELECT COUNT(*) FROM users WHERE username = ?";
 		try (PreparedStatement statement = db.prepareStatement(query)) {
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
