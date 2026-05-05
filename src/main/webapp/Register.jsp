@@ -25,8 +25,8 @@
                 <h4 class="w3-text-teal section-title">Account Information</h4>
                 <p>
                     <label class="w3-text-grey">Username</label>
-                    <input class="w3-input w3-border" type="text" id="name" name="name" required minlength="5"
-                        value="${user.name}" placeholder="Enter your username (5-20 characters)" title="Username must be between 5 and 20 characters." />
+                    <input class="w3-input w3-border" type="text" id="username" name="username" required minlength="5"
+                        value="${user.username}" placeholder="Enter your username (5-20 characters)" title="Username must be between 5 and 20 characters." />
                 </p>
 
                 <p>
