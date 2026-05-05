@@ -29,9 +29,14 @@ public class UserService {
 	
 	private static final String PASSWORD_REGEX = 
 	        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$";
+    
+    private static final String EMAIL_REGEX = 
+    "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
 
+    private static final String PHONE_REGEX = 
+    "^\\+?[1-9]\\d{7,14}$"; // E.164 format, allowing international phone numbers (change it from sem1)
 
-    //afegir validacions per email, phone
+    
 	
     public Map<String, String> validate(User user) {
         Map<String, String> errors = new HashMap<>();
@@ -52,13 +57,13 @@ public class UserService {
         }
 
   
-        String name = user.getName();
-        if (name == null || name.trim().isEmpty()) {
-            errors.put("name", "Username cannot be empty.");
-        } else if (name.length() < 5 || name.length() > 20) {
-            errors.put("name", "Username must be between 5 and 20 characters.");
-        } else if (userRepository.existsByUsername(name)) {
-            errors.put("name", "Username already exists.");
+        String username = user.getUsername();
+        if (username == null || username.trim().isEmpty()) {
+            errors.put("username", "Username cannot be empty.");
+        } else if (username.length() < 5 || username.length() > 20) {
+            errors.put("username", "Username must be between 5 and 20 characters.");
+        } else if (userRepository.existsByUsername(username)) {
+            errors.put("username", "Username already exists.");
         }
 
         String password = user.getPassword();
@@ -71,13 +76,16 @@ public class UserService {
             errors.put("email", "Email cannot be empty.");
         } else if (userRepository.existsByEmail(email)) {
             errors.put("email", "Email already exists.");
-        } 
-        //check format email
-
+        } else if (!email.matches(EMAIL_REGEX)) {
+            errors.put("email", "Invalid email format.");
+        }
+        
         String phone = user.getPhone();
         if (phone == null || phone.trim().isEmpty()) {
             errors.put("phone", "Phone cannot be empty.");
-        } //check format phone
+        }  else if (!phone.matches(PHONE_REGEX)) {
+            errors.put("phone", "Invalid phone number format.");
+        }
 
         String dateOfBirth = user.getDateOfBirth();
         if (dateOfBirth == null || dateOfBirth.trim().isEmpty()) {
@@ -94,7 +102,13 @@ public class UserService {
             }
         }
 
-        //hem de posar lo de les preferències alimentàries, al·lèrgies, gènere i títol? parlar-ho
+        String allergies= user.getAllergies();
+        if (allergies == null || allergies.trim().isEmpty()) {
+            errors.put("allergies", "Allergies cannot be empty.");
+        }else if (allergies.length() > 200) {
+            errors.put("allergies", "Allergies must not exceed the 200 characters.");
+        }
+
         return errors;
     }
 

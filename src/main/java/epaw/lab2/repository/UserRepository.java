@@ -52,9 +52,9 @@ public class UserRepository extends BaseRepository {
 	}
 	
 	public void save(User user) {
-		String query = "INSERT INTO users (name, password, email, phone, firstName, lastName, dateOfBirth, gender, title, allergies, foodPreferences) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO users (username, password, email, phone, firstName, lastName, dateOfBirth, gender, title, allergies, foodPreferences) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement statement = db.prepareStatement(query)) {
-			statement.setString(1, user.getName());
+			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getEmail());
 			statement.setString(4, user.getPhone());
@@ -71,15 +71,15 @@ public class UserRepository extends BaseRepository {
 		}
 	}
 	
-    public Optional<User> findByName(String name) {
+    public Optional<User> findByName(String username) {
         String query = "SELECT id, name, password FROM users WHERE name = ?";
         try (PreparedStatement statement = db.prepareStatement(query)) {
-        	statement.setString(1, name);
+        	statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 User user = new User();
                 user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
+                user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
                 user.setPhone(rs.getString("phone"));
