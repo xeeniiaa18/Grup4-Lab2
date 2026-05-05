@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
-<html lang="ca"> //canviar a anglès?
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -17,34 +17,33 @@
     <div class="main-container">
         <div class="w3-card-4 w3-white">
             <div class="w3-container w3-teal">
-                <h2>Join our food community!</h2>
+                <h2>Join Our Food Community!</h2>
             </div>
 
             <form id="registerForm" action="Register" method="POST" class="w3-container w3-padding-24">
 
-                <h4 class="w3-text-teal">Personal Information</h4>
-                <h4 class="w3-text-teal">Account Information</h4>
+                <h4 class="w3-text-teal section-title">Account Information</h4>
                 <p>
-                    <label class="w3-text-grey">Nom d'usuari</label>
+                    <label class="w3-text-grey">Username</label>
                     <input class="w3-input w3-border" type="text" id="name" name="name" required minlength="5"
-                        value="${user.name}" title="L'usuari ha de tenir entre 5 i 20 caràcters." />
+                        value="${user.name}" placeholder="Enter your username (5-20 characters)" title="Username must be between 5 and 20 characters." />
                 </p>
 
                 <p>
-                    <label class="w3-text-grey">Contrasenya</label>
+                    <label class="w3-text-grey">Password</label>
                     <input class="w3-input w3-border" type="password" id="password" name="password" required
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$" value="${user.password}"
-                        title="Mínim 8 caràcters, incloent majúscules, números i un caràcter especial (@#$%^&*)." />
+                        placeholder="Min. 8 chars: uppercase, number, special char (@#$%^&*)" title="Minimum 8 characters, including uppercase, number, and special character (@#$%^&*)." />
                 </p>
 
                 <p>
-                    <label class="w3-text-grey">Repetir contrasenya</label>
+                    <label class="w3-text-grey">Confirm Password</label>
                     <input class="w3-input w3-border" type="password" id="confirmPassword"
                         name="confirmPassword" required value="${user.password}"
-                        title="Les contrasenyes han de coincidir" />
+                        placeholder="Confirm your password" title="Passwords must match." />
                 </p>
 
-                <button type="submit" class="w3-button w3-teal w3-block w3-section w3-padding">Enviar Registre</button>
+                <button type="submit" class="w3-button w3-teal w3-block w3-section w3-padding register-btn">Register</button>
 
             </form>
         </div>
