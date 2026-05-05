@@ -35,12 +35,36 @@ public class UserRepository extends BaseRepository {
         }
         return false;
 	}
+
+    
+	public boolean existsByEmail(String email) {
+		String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+		try (PreparedStatement statement = db.prepareStatement(query)) {
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+	}
 	
 	public void save(User user) {
-		String query = "INSERT INTO users (name, password) VALUES (?, ?)";
+		String query = "INSERT INTO users (name, password, email, phone, firstName, lastName, dateOfBirth, gender, title, allergies, foodPreferences) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement statement = db.prepareStatement(query)) {
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getPhone());
+			statement.setString(5, user.getFirstName());
+			statement.setString(6, user.getLastName());
+			statement.setString(7, user.getDateOfBirth());
+			statement.setString(8, user.getGender());
+			statement.setString(9, user.getTitle());
+			statement.setString(10, user.getAllergies());
+			statement.setString(11, user.getFoodPreferences());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,6 +81,15 @@ public class UserRepository extends BaseRepository {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setDateOfBirth(rs.getString("dateOfBirth"));
+                user.setGender(rs.getString("gender"));
+                user.setTitle(rs.getString("title"));
+                user.setAllergies(rs.getString("allergies"));
+                user.setFoodPreferences(rs.getString("foodPreferences"));
                 return Optional.of(user);
             }
         } catch (SQLException e) {

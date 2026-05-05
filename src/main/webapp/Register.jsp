@@ -2,14 +2,14 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="ca"> //canviar a anglès?
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Registre d'Usuari (Manual)</title>
+    <title>User Registration</title>
 </head>
 
 <body>
@@ -17,11 +17,13 @@
     <div class="main-container">
         <div class="w3-card-4 w3-white">
             <div class="w3-container w3-teal">
-                <h2>Registre (Validació Manual)</h2>
+                <h2>Join our food community!</h2>
             </div>
 
             <form id="registerForm" action="Register" method="POST" class="w3-container w3-padding-24">
 
+                <h4 class="w3-text-teal">Personal Information</h4>
+                <h4 class="w3-text-teal">Account Information</h4>
                 <p>
                     <label class="w3-text-grey">Nom d'usuari</label>
                     <input class="w3-input w3-border" type="text" id="name" name="name" required minlength="5"

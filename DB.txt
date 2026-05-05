@@ -1,5 +1,15 @@
 CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VARCHAR(20) NOT NULL,
-  password VARCHAR(20) NOT NULL
+  password VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  phone VARCHAR(9),
+  firstName VARCHAR(50) NOT NULL,
+  lastName VARCHAR(50) NOT NULL,
+  dateOfBirth DATE NOT NULL,
+  gender VARCHAR(20),
+  title VARCHAR(20),
+  allergies VARCHAR(500),
+  foodPreferences VARCHAR(500)
+
 );
