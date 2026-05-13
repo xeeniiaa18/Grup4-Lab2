@@ -107,7 +107,4 @@ public class User implements Serializable {
 	public void setFoodPreferences(String foodPreferences) {
 		this.foodPreferences = foodPreferences;
 	}
-
-
-
 }

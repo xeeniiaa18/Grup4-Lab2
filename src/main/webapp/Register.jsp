@@ -59,7 +59,7 @@
                 </div>
 
                 <!-- Step 2: Personal Information -->
-                <div id="step2" style="display:none">
+                <div id="step2">
                     <h4 class="w3-text-teal section-title">Personal Information</h4>
 
                     <p>
@@ -103,9 +103,9 @@
                             title="Maximum 200 characters." />
                     </p>
 
-                    <div style="display:flex; gap:10px;">
+                    <div class="button-row"> 
                         <button type="button" id="backBtn" class="w3-button w3-grey w3-section w3-padding back-btn">&larr; Back</button>
-                        <button type="submit" class="w3-button w3-teal w3-section w3-padding register-btn" style="flex:1">Register</button>
+                        <button type="submit" class="w3-button w3-teal w3-section w3-padding register-btn">Register</button>
                     </div>
                 </div>
 
@@ -157,7 +157,7 @@
             dot1.classList.add('active');
         });
 
-        // If server returned errors on step2 fields, go straight to step2
+        const step1Fields = ['username', 'password', 'confirmPassword'];
         const step2Fields = ['firstName', 'lastName', 'email', 'phone', 'dateOfBirth', 'allergies'];
 
         // Injectem els errors del servidor (Format Map K/V) per al JS
@@ -167,10 +167,20 @@
             </c:forEach>
         };
 
+        const hasStep1Error = step1Fields.some(f => serverErrors[f]);
         const hasStep2Error = step2Fields.some(f => serverErrors[f]);
-        if (hasStep2Error) {
+
+        if (hasStep1Error) {
+            step1.style.display = 'block';
+            step2.style.display = 'none';
+
+            dot1.classList.add('active');
+            dot1.classList.remove('done');
+            dot2.classList.remove('active');
+        } else if (hasStep2Error) {
             step1.style.display = 'none';
             step2.style.display = 'block';
+
             dot1.classList.remove('active');
             dot1.classList.add('done');
             dot2.classList.add('active');
